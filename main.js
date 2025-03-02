@@ -1,5 +1,4 @@
 var thoRaMau = true
-var checkChay = undefined
 const IaRaTuDauTho = () => {
     const ImageIaRaTuDau = document.querySelector("#IaRaTuDauId > img")
     setInterval(() => {
@@ -14,42 +13,42 @@ const IaRaTuDauTho = () => {
     }, 500);
 }
 const diChuyen = (key) => {
-    const ImageIaRaTuDau = document.getElementById("IaRaTuDauId")
     const ImageIaRaTuDauCon = document.querySelector("#IaRaTuDauId > img")
+    thoRaMau = false
     if (key === "ArrowRight") {
-        thoRaMau = false
-        ImageIaRaTuDau.style.left = (parseInt(ImageIaRaTuDau.style.left.substring(0, ImageIaRaTuDau.style.left.length - 2)) + 10) + "px"
         ImageIaRaTuDauCon.src = "./IaRaTuDauChay.png"
     }
     else if (key === "ArrowLeft") {
-        thoRaMau = false
-        ImageIaRaTuDau.style.left = (parseInt(ImageIaRaTuDau.style.left.substring(0, ImageIaRaTuDau.style.left.length - 2)) - 10) + "px"
         ImageIaRaTuDauCon.src = "./IaRaTuDauChay.png"
     }
-    thoRaMau = true
-    ImageIaRaTuDau.src = "./IaRaTuDauBTH.png"
+    setTimeout(() => { ImageIaRaTuDauCon.src = "./IaRaTuDauBTH.png" }, 200)
 }
 const batSuKienDiChuyen = () => {
-    var checkChan = true
+    var checkChay = undefined
+    const ImageIaRaTuDau = document.getElementById("IaRaTuDauId")
     document.addEventListener("keydown", (event) => {
-        if (!checkChay && checkChan) {
-            checkChan = false
+        if (!checkChay) {
             diChuyen(event.key)
-            setTimeout(() => {
-                checkChan = true
-            }, 200)
         }
         checkChay = event.key
+        if (event.key === "ArrowRight") {
+            ImageIaRaTuDau.style.left = (parseInt(ImageIaRaTuDau.style.left.substring(0, ImageIaRaTuDau.style.left.length - 2)) + 10) + "px"
+        }
+        else if (event.key === "ArrowLeft") {
+            ImageIaRaTuDau.style.left = (parseInt(ImageIaRaTuDau.style.left.substring(0, ImageIaRaTuDau.style.left.length - 2)) - 10) + "px"
+        }
+
     })
     document.addEventListener("keyup", () => {
         checkChay = undefined
-  
+        thoRaMau = true
     })
     setInterval(() => {
         if (checkChay) {
+            console.log("gg")
             diChuyen(checkChay)
         }
-    }, 700)
+    }, 400)
 }
 window.onload = () => {
     IaRaTuDauTho()
