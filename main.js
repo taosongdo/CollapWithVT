@@ -37,7 +37,7 @@ const batSuKienDiChuyen = () => {
             diChuyen(event.key)
             setTimeout(() => {
                 checkChan = true
-            }, 1000)
+            }, 500)
         }
         checkChay = event.key
     })
